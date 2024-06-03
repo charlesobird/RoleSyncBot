@@ -1,0 +1,26 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+type Role {
+  id String
+  name String
+}
+
+model Server {
+  id String @id @map("_id")
+  roleGroups RoleGroup[]
+  ownerID String 
+  botAdmins String[] // discord user ids
+}
+
+type RoleGroup {
+  id String 
+  name String
+  roles Role[]
+}
